@@ -30,7 +30,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         ]
 
     def save(self, **kwargs):
-        if self.instance.polls.exists():
+        if self.instance and self.instance.polls.exists():
             for poll in self.instance.polls.all():
                 if poll.locked:
                     raise ValidationError(detail={
