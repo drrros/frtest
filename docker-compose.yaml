@@ -8,7 +8,7 @@
       image: postgres:12.3
       env_file:
         - ./env/env.env
-      container_name: tm_db
+      container_name: fr_db
     web:
       build: .
       command: gunicorn -t 180 -w 3 frtest.wsgi:application --bind 0.0.0.0:8000
@@ -21,11 +21,11 @@
         - 8000
       depends_on:
         - db
-      container_name: tm_web
+      container_name: fr_web
     nginx:
       build: ./nginx
       restart: always
-      container_name: tm_nginx
+      container_name: fr_nginx
       volumes:
         - ./static/:/code/static
       ports:
