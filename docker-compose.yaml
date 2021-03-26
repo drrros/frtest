@@ -16,7 +16,7 @@
       env_file:
         - ./env/env.env
       volumes:
-        - ./static:/code/static
+        - ./static:/code/static:Z
       expose:
         - 8000
       depends_on:
@@ -27,7 +27,7 @@
       restart: always
       container_name: fr_nginx
       volumes:
-        - ./static:/code/static
+        - ./static:/code/static:Z
       ports:
         - 1354:80
       depends_on:
