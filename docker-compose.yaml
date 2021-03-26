@@ -4,19 +4,19 @@
     db:
       restart: always
       volumes:
-        - db/:/var/lib/postgresql/data/
+        - ./db/:/var/lib/postgresql/data/
       image: postgres:12.3
       env_file:
-        - env/env.env
+        - ./env/env.env
       container_name: tm_db
     web:
       build: .
       command: gunicorn -t 180 -w 3 frtest.wsgi:application --bind 0.0.0.0:8000
       restart: always
       env_file:
-        - env/env.env
+        - ./env/env.env
       volumes:
-        - static/:/code/static
+        - ./static/:/code/static
       expose:
         - 8000
       depends_on:
@@ -27,7 +27,7 @@
       restart: always
       container_name: tm_nginx
       volumes:
-        - .static/:/code/static
+        - ./static/:/code/static
       ports:
         - 1354:80
       depends_on:
